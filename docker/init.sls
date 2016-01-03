@@ -79,8 +79,14 @@ docker-service:
     {% endif %}
 
 docker-py requirements:
-  pkg.installed:
-    - name: python-pip
+  python-pip:
+    pkg.removed
+  python-pip-whl:
+    pkg.removed
+  
+  pip-install:
+    cmd.run:
+      - name: easy_install pip
   pip.installed:
     {%- if "pip_version" in docker %}
     - name: docker-py {{ docker.pip_version }}
